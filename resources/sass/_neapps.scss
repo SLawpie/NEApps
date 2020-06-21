@@ -1,0 +1,24 @@
+// Your variable overrides
+$body-bg: #171717;
+// $font-family-sans-serif: 'Quicksand', sans-serif;
+
+.custom-file-label::after {
+    content: "Wybierz";
+}
+  
+ .custom-file-input::before {
+    content: 'Wybierz';
+ }
+html, body {
+    background-color: #171717;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+.btn-link:focus, .btn-link.focus {
+    text-decoration: underline;
+    box-shadow: none;
+}
