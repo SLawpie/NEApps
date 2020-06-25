@@ -10,7 +10,7 @@
 
 @section('content')
 
-  <div class="mt-1">
+  <div class="mt-3">
     <div class="card bg-dark text-white" style="width: 18rem;">
       <div class="card-header text-center">
           <p class="h5 card-title">USG</p>

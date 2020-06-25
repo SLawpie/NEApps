@@ -42,7 +42,7 @@ class User extends Authenticatable
     }
 
     public function hasAnyRoles($roles){
-        if ($this->roles()->whereIn('name', $roles)->first()){ //$this means cureant user becouse we in user controler
+        if ($this->roles()->whereIn('name', $roles)->first()){ //$this means curent user because we in user controler
             return true;
         }
 

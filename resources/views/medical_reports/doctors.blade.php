@@ -32,7 +32,13 @@
         @foreach ($sheetNames as $i => $sheetName)
         <div class="card text-white text-center bg-transparent mb-3 mr-0" style="width: 16rem;">
             <div class="card-body my-0">
-                <a href="{{ route('medical_reports.import.sheet', $i) }}" class="btn btn-primary" style="width: 14rem">{{ $sheetName }}</a>
+                @php
+                    $string = $i . '-' . $sheetName;                
+                @endphp
+                <a href="{{ route('medical_reports.import.sheet', Crypt::encryptString($string)) }}" 
+                    class="btn btn-primary" style="width: 14rem">
+                    {{ $sheetName }}
+                </a>
             </div>
           </div>
 

@@ -22,8 +22,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 
-    <!-- Styles -->111
+    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/neapps.css') }}" rel="stylesheet" type="text/css" >
 
 </head>
 <body class="sb-nav-fixed">
@@ -147,16 +148,33 @@
                     <div class="small">
                         {{ __('auth.logged') }}
                     </div>
-                    {{ Auth::user()->name }}
+                    <div class="text-info">
+                        {{ Auth::user()->name }}
+                    </div>
                 </div>
             </nav>
         </div>
+        
         <div id="layoutSidenav_content">
+        {{-- <div> --}}
             <main>
                 <div class="container-fluid">
                     @yield('content')
                 </div>
             </main>
+            <footer class="py-4 bg-dark mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted"></div>
+                        <div>
+                            Copyright &copy; Noelle 2020
+                            {{-- <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a> --}}
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
 

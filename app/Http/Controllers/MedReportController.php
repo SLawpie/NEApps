@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Gate;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+
 use App\Imports\MRSheetNamesImport;
 use App\Imports\MRSelectSheetImport;
+
 use Validator;
+
 use App\MRSettings;
 use App\MRImportedSheetData;
+use App\MRFacility;
+use App\MRExamination;
 
 
 class MedReportController extends MRBaseController
@@ -133,7 +140,7 @@ class MedReportController extends MRBaseController
             ]);
         }
 
-        $mrSettings = MRSettings::firstorCreate(
+        $mrSettings = MRSettings::firstOrCreate(
             ['name' => 'original_file_name'],
             ['value' => $file->getClientOriginalName()]
         );
@@ -144,7 +151,7 @@ class MedReportController extends MRBaseController
             ]);
         }
 
-        $mrSettings = MRSettings::firstorCreate(
+        $mrSettings = MRSettings::firstOrCreate(
             ['name' => 'usg'],
             ['value' => false]
         );
@@ -168,24 +175,87 @@ class MedReportController extends MRBaseController
         ]);
     }
 
+
+    //
+    // Delete temporary uploaded files
+    //
     public function deleteUploadFiles()
     {
         array_map('unlink', glob($this->savePath . "MR*.*"));
     }
 
-    public function readSheet($i)
+    public function readSheet($request)
     {
+        $decrypted = Crypt::decryptString($request);
+        $pieces = explode("-", $decrypted);
+        $sheetNo = $pieces[0];
+        $doctorName = $pieces[1];
+
         MRImportedSheetData::truncate();
 
         $import = new MRSelectSheetImport();
-        $import->onlySheets($i);
+        $import->onlySheets($sheetNo);
 
         $fileName = MRSettings::where('name', 'tmp_file_name')->first();  
 
         $ts = Excel::import($import, $this->savePath.$fileName->value);
 
-        echo ("GOTOWE !");
-        return;
+        //Temporarty OFF
+        MedReportController::deleteUploadFiles();
+
+        $count = MRImportedSheetData::count();
+
+        $reportables = MRFacility::where('reportable',true)->get();
+        //$reportables = MRFacility::all();
+
+        $examinations = MRExamination::where('reportable', true)->orderBy('name', 'asc')->get();
+
+        foreach ($examinations as $key => $examination) {
+           
+            $info = DB::table('m_r_imported_sheet_data')
+                ->select(DB::raw('count(*) as sum'))
+                ->where('col1', '=',  $examination->name)
+                ->get();
+
+            $report[$examination->name]['All'] = $info[0]->sum;
+            $sum = $info[0]->sum;
+            foreach ($reportables as $reportable) {
+
+                $text = "count(if(col0='" . $reportable->name . "',1,NULL)) as sum";
+
+                $info = DB::table('m_r_imported_sheet_data')
+                    ->select(DB::raw($text))
+                    ->where('col1', '=',  $examination->name)
+                    ->get();
+
+                $report[$examination->name][$reportable->name] = $info[0]->sum;
+                    
+                $sum -= $info[0]->sum;
+
+            }
+
+            $report[$examination->name]['Others'] = $sum;
+
+        };
+
+        //dd($report);
+
+        // foreach ($reportables as $reportable) {
+        //     $text = $reportable->name;
+        //     $examinations[$text] = MRImportedSheetData::where('col0', 'like', $text);
+        // }
+
+        // $text = 'Płatne';
+        // $examinations[$text] = MRImportedSheetData::where('col0', 'like', $text);
+        
+        //dd($examinations);
+        
+        //echo ("GOTOWE ! - ".$count);
+        
+        // return view('medical_reports.usg.report')->with([
+        //     'count' => $count,
+        // ]);
+        return view('medical_reports.usg.report', compact('doctorName', 'count', 'examinations', 'reportables', 'report'));
     }
 
 }

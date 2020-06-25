@@ -8,6 +8,8 @@ use Maatwebsite\Excel\Row;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use App\MRImportedSheetData;
 use App\MRSettings;
+use App\MRExamination;
+use App\MRFacility;
 
 
 class MRSheetImport implements OnEachRow
@@ -35,6 +37,13 @@ class MRSheetImport implements OnEachRow
                         'col0' => $row[2],
                         'col1' => $row[4],
                     ]);
+                    MRExamination::firstOrCreate(
+                        ['name' => $row[4]]
+                    );
+                    MRFacility::firstOrCreate(
+                        ['name' => $row[2]]
+                    );
+
                 }
             }
             else 
