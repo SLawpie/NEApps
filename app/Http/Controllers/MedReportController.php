@@ -201,7 +201,7 @@ class MedReportController extends MRBaseController
         $ts = Excel::import($import, $this->savePath.$fileName->value);
 
         //Temporarty OFF
-        MedReportController::deleteUploadFiles();
+        //MedReportController::deleteUploadFiles();
 
         $count = MRImportedSheetData::count();
 

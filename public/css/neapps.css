@@ -54,16 +54,18 @@
 
 .ne-table td:nth-of-type(6) {
     width: auto;
-  }
+}
 
 
- .ne-content {
-     padding-top: 150px;
- } 
+.ne-content {
+     padding-top: 70px;
+} 
+
 .ne-sticky {
     background: #171717;
     width: 100%;
-    z-index: 100;
+    z-index: 1;
+    /* border: 2px solid green; */
 }
 
 .ne-fixed {

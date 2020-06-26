@@ -156,9 +156,12 @@
         </div>
         
         <div id="layoutSidenav_content">
+        {{-- <div id="layoutSidenav_content" style="border:3px solid blue"> --}}
         {{-- <div> --}}
             <main>
+            {{-- <main class="" style="border:5px solid yellow"> --}}
                 <div class="container-fluid">
+                {{-- <div class="container-fluid" style="border:3px solid red"> --}}
                     @yield('content')
                 </div>
             </main>

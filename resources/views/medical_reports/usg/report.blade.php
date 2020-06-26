@@ -1,50 +1,44 @@
 @extends('layouts.app')
 
 @section('application-module-name')
-<div class="d-flex flex-row font-weight-light">
-    <a class="text-decoration-none" href="{{ route('medical_reports.index') }}">
-        <div class="text-white-50 mb-0 ">
-            {{ __('medical_reports.reports') }}
-            &nbsp;/&nbsp;
+    <div class="d-flex flex-row font-weight-light">
+        <a class="text-decoration-none" href="{{ route('medical_reports.index') }}">
+            <div class="text-white-50 mb-0 ">
+                {{ __('medical_reports.reports') }}
+                &nbsp;/&nbsp;
+            </div>
+        </a>
+        <a class="text-decoration-none" href="{{ route('medical_reports.import.file') }}">
+            <div class="text-white-50 mb-0 ml-1">
+                Raport wg. lekarza
+                &nbsp;/&nbsp;
+            </div>
+        </a>
+        <div class="text-light mb-0 ml-1">
+            Badania USG
         </div>
-    </a>
-    <a class="text-decoration-none" href="{{ route('medical_reports.import.file') }}">
-        <div class="text-white-50 mb-0 ml-1">
-            Raport wg. lekarza
-            &nbsp;/&nbsp;
-        </div>
-    </a>
-    <div class="text-light mb-0 ml-1">
-        Badania USG
     </div>
-</div>
 @endsection
 
 @section('content')
-    <div class="ne-sticky">
-        <h2 class="py-3 font-weight-light">Wykaz badań USG</h2>
-
-        <div class="row justify-content-start mt-1 ml-1">
-            <div class="h4 mb-1 mr-2 font-weight-light">
+    <div class="ne-sticky pt-3">
+        <div class="d-flex flex-row">
+            <div class="h3 font-weight-light mr-3">
                 Lekarz:
             </div>
-            <div class="h4 text-light mb-0 ml-1 font-weight-light">
+            <div class="h3 font-weight-light text-light">
                 {{ $doctorName}}
             </div>
-        </div>
-        <div class="row justify-content-start mt-0 ml-1 mb-2">
-            <div class="h4 mb-0 mr-2 font-weight-light">
+            <div class="h3 font-weight-light mx-3">
                 Ilość badań:
             </div>
-            <div class="h4 text-light mb-0 ml-1 font-weight-light">
+            <div class="h3 font-weight-light text-light">
                 {{ $count}}
             </div>
         </div>
-
         <div class="ne-progress-container">
             <div class="ne-progress-bar" id="myBar"></div>
         </div>
-
     </div>
 
 
@@ -112,6 +106,7 @@
     <div class="mt-5"></div>
 
 <script>
+
     $(window).scroll(function(){
         var sticky = $('.ne-sticky'),
             scroll = $(window).scrollTop();
