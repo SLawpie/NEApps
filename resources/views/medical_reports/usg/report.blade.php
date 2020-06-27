@@ -41,8 +41,56 @@
         </div>
     </div>
 
+    <div class="bg-white text-dark p-2">
+        <samp>
+            <strong><b>
+            Kędziezyn-Koźle, 
+            @php
+                echo(date('d.m.yy'))
+            @endphp
+            <br><br>
+            {{ $doctorName}}
+            <br>
+            </strong></b>
+            Ilość badań USG:
+            <strong><b>
+            {{ $count}}
+            <br><br>
+            </strong></b>
+            @foreach ($examinations as $key=>$examination)
+                <strong><b>{{ $report[$examination->name]['All'] }} x {{ $examination->name }}</b></strong><br>
+                @foreach ($reportables as $reportable)
+                    @if( $report[$examination->name][$reportable->name] > 0)
+                        @php
+                            echo(str_repeat('&nbsp;',5));
+                        @endphp
+                        {{ $reportable->name }}:
+                        @php
+                            // echo(str_repeat('&nbsp;',2));
+                        @endphp
+                        {{ $report[$examination->name][$reportable->name] }}x       
+                        0,00                     
+                        <br>
+                    @endif
+                @endforeach
+                @if ($report[$examination->name]['Others'] > 0)
+                    @php
+                        echo(str_repeat('&nbsp;',5));
+                    @endphp
+                    wg. cennika przychodni:
+                    @php
+                        // echo(str_repeat('&nbsp;',2));
+                    @endphp
+                    {{ $report[$examination->name]['Others'] }}x
+                    0,00                     
+                    <br>
+                @endif
+            @endforeach
+        </samp>
+    </div>
+    <div class="mt-5"></div>
 
-    <div class="ne-content">
+    {{-- <div class="ne-content">
         <div class="row justify-content-md-left">
             <div class="col-md-8 mt-3">
                 <table class="ne-table">
@@ -119,5 +167,6 @@
         document.getElementById("myBar").style.width = scrolled + "%";
 
       });
-</script>
-    @endsection
+</script> --}}
+    
+@endsection
