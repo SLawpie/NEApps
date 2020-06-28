@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
 
+
+/* body {
+  background-image: url("../images/patterns/what-the-hex-dark.png");
+} */
+
 .ne-table {
   font-family: Lato, Arial, sans-serif;
   font-size: 100%;
@@ -23,9 +28,9 @@
   font-weight: normal;
 }
 
-.ne-table .ne-cell {
-   /* border: 1px solid yellow; */
-}
+/* .ne-table .ne-cell {
+   border: 1px solid yellow;
+} */
 
 .ne-table td:nth-of-type(1) {
   width: 30px;

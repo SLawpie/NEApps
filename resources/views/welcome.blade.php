@@ -12,6 +12,7 @@
         <!-- Styles -->
         <style>
             html, body {
+                background-image: url("{{ asset('images/patterns/what-the-hex-dark.png') }}");
                 background-color: #171717;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
