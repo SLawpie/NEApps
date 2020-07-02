@@ -46,7 +46,7 @@
             <strong><b>
             Kędziezyn-Koźle, 
             @php
-                echo(date('d.m.yy'))
+                echo(date('d.m.yy').'r.')
             @endphp
             <br><br>
             {{ $doctorName}}
@@ -58,32 +58,34 @@
             <br><br>
             </strong></b>
             @foreach ($examinations as $key=>$examination)
-                <strong><b>{{ $report[$examination->name]['All'] }} x {{ $examination->name }}</b></strong><br>
-                @foreach ($reportables as $reportable)
-                    @if( $report[$examination->name][$reportable->name] > 0)
+                @if ($report[$examination->name]['All'] > 0)
+                    <strong><b>{{ $report[$examination->name]['All'] }} x {{ $examination->name }}</b></strong><br>
+                    @foreach ($reportables as $reportable)
+                        @if( $report[$examination->name][$reportable->name] > 0)
+                            @php
+                                echo(str_repeat('&nbsp;',5));
+                            @endphp
+                            {{ $reportable->name }}:
+                            @php
+                                // echo(str_repeat('&nbsp;',2));
+                            @endphp
+                            {{ $report[$examination->name][$reportable->name] }}x       
+                            0,00                     
+                            <br>
+                        @endif
+                    @endforeach
+                    @if ($report[$examination->name]['Others'] > 0)
                         @php
                             echo(str_repeat('&nbsp;',5));
                         @endphp
-                        {{ $reportable->name }}:
+                        wg. cennika przychodni:
                         @php
                             // echo(str_repeat('&nbsp;',2));
                         @endphp
-                        {{ $report[$examination->name][$reportable->name] }}x       
+                        {{ $report[$examination->name]['Others'] }}x
                         0,00                     
                         <br>
                     @endif
-                @endforeach
-                @if ($report[$examination->name]['Others'] > 0)
-                    @php
-                        echo(str_repeat('&nbsp;',5));
-                    @endphp
-                    wg. cennika przychodni:
-                    @php
-                        // echo(str_repeat('&nbsp;',2));
-                    @endphp
-                    {{ $report[$examination->name]['Others'] }}x
-                    0,00                     
-                    <br>
                 @endif
             @endforeach
         </samp>

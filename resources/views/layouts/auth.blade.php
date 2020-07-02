@@ -14,7 +14,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     {{-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand:400,500,700&amp;display=swap&amp;subset=latin-ext"> --}}
 
     <!-- Styles -->
@@ -22,28 +22,31 @@
     <link href="{{ asset('css/neapps.css') }}" rel="stylesheet" type="text/css" >
     
 </head>
-<body>
-    <div id="layoutAuthentication">
+<body class="auth-body">
+    {{-- <div id="layoutAuthentication"> --}}
 
-        <div id="layoutAuthentication_content">
-            <main>
+        {{-- <div id="layoutAuthentication_content"> --}}
+            {{-- <main> --}}
                 
                 @yield('content')
-            </main>
-        </div>
+            {{-- </main> --}}
+        {{-- </div> --}}
 
-        <div id="layoutAuthentication_footer">
-            <div class="footer fixed-bottom p-2 bg-secondary text-white-50 small">
+        {{-- <div id="layoutAuthentication_footer">
+            <div class="footer fixed-bottom p-2 text-white-50 small">
                 <div class="d-flex justify-content-between">
                     <div class="mr-auto">
                         &nbsp;
                     </div>
                     <div class="mx-3">
-                        &copy; Noelle 2020
+                        &copy; Noelle 
+                        @php
+                            echo(date('yy'));
+                        @endphp
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div> --}}
+    {{-- </div> --}}
 </body>
 </html>

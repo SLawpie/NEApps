@@ -122,6 +122,7 @@ class MedReportController extends MRBaseController
         ]);
 
         MedReportController::deleteUploadFiles();
+        MedReportController::initialSettings();
 
         $dateTime = date('Ymd_His');
         $file = $request->file('file');
@@ -129,38 +130,46 @@ class MedReportController extends MRBaseController
         
         $file->move($this->savePath, $fileName);
         
-        $mrSettings = MRSettings::firstOrCreate(
-            ['name' => 'tmp_file_name'],
-            ['value' => $fileName]
-        );
-        if ($mrSettings)
-        {
-            MRSettings::where('name', 'tmp_file_name')->update([
-                'value' => $fileName,
-            ]);
-        }
+        // $mrSettings = MRSettings::firstOrCreate(
+        //     ['name' => 'tmp_file_name'],
+        //     ['value' => $fileName]
+        // );
+        // if ($mrSettings)
+        // {
+        //     MRSettings::where('name', 'tmp_file_name')->update([
+        //         'value' => $fileName,
+        //     ]);
+        // }
+        MRSettings::where('name', 'tmp_file_name')->update([
+            'value' => $fileName,
+        ]);
+        // $mrSettings = MRSettings::firstOrCreate(
+        //     ['name' => 'original_file_name'],
+        //     ['value' => $file->getClientOriginalName()]
+        // );
+        // if ($mrSettings)
+        // {
+        //     MRSettings::where('name', 'original_file_name')->update([
+        //         'value' => $file->getClientOriginalName(),
+        //     ]);
+        // }
+        MRSettings::where('name', 'original_file_name')->update([
+            'value' => $file->getClientOriginalName(),
+        ]);
+        // $mrSettings = MRSettings::firstOrCreate(
+        //     ['name' => 'usg'],
+        //     ['value' => false]
+        // );
+        // if ($mrSettings)
+        // {
+        //     MRSettings::where('name', 'usg')->update([
+        //         'value' => 'false',
+        //     ]);
+        // }
+        // MRSettings::where('name', 'usg')->update([
+        //     'value' => 'false',
+        // ]);
 
-        $mrSettings = MRSettings::firstOrCreate(
-            ['name' => 'original_file_name'],
-            ['value' => $file->getClientOriginalName()]
-        );
-        if ($mrSettings)
-        {
-            MRSettings::where('name', 'original_file_name')->update([
-                'value' => $file->getClientOriginalName(),
-            ]);
-        }
-
-        $mrSettings = MRSettings::firstOrCreate(
-            ['name' => 'usg'],
-            ['value' => false]
-        );
-        if ($mrSettings)
-        {
-            MRSettings::where('name', 'usg')->update([
-                'value' => 'false',
-            ]);
-        }
 
         $Import = new MRSheetNamesImport();
         $ts = Excel::import($Import, $this->savePath . $fileName);
@@ -177,6 +186,41 @@ class MedReportController extends MRBaseController
 
 
     //
+    // Setup initial settings
+    //
+    public function initialSettings()
+    {
+        $mrSettings = MRSettings::firstOrCreate(
+            ['name' => 'tmp_file_name'],
+            ['value' => '']
+        );
+        $mrSettings = MRSettings::firstOrCreate(
+            ['name' => 'original_file_name'],
+            ['value' => '']
+        );
+        $mrSettings = MRSettings::firstOrCreate(
+            ['name' => 'usg'],
+            ['value' => 'false']
+        );
+        if ($mrSettings)
+        {
+            MRSettings::where('name', 'usg')->update([
+                'value' => 'false',
+            ]);
+        }
+        $mrSettings = MRSettings::firstOrCreate(
+            ['name' => 'imported'],
+            ['value' => 'false']
+        );
+        if ($mrSettings)
+        {
+            MRSettings::where('name', 'imported')->update([
+                'value' => 'false',
+            ]);
+        }
+    }
+
+    //
     // Delete temporary uploaded files
     //
     public function deleteUploadFiles()
@@ -191,17 +235,35 @@ class MedReportController extends MRBaseController
         $sheetNo = $pieces[0];
         $doctorName = $pieces[1];
 
-        MRImportedSheetData::truncate();
+        $imported = MRSettings::where('name', 'imported')->first(); 
+        
+        if ($imported->value != 'true') //read from DB or from file
+        {
+            MRImportedSheetData::truncate();
+            MRSettings::where('name', 'usg')->update([
+                'value' => 'false',
+            ]);
 
-        $import = new MRSelectSheetImport();
-        $import->onlySheets($sheetNo);
+            $tmp_fileName = MRSettings::where('name', 'tmp_file_name')->first();
 
-        $fileName = MRSettings::where('name', 'tmp_file_name')->first();  
+            if ($tmp_fileName->value == '' ) // if temp file is deleted return to upload
+            {
+                return view('medical_reports.index');
+            }
 
-        $ts = Excel::import($import, $this->savePath.$fileName->value);
+            $import = new MRSelectSheetImport();
+            $import->onlySheets($sheetNo);
 
-        //Temporarty OFF
-        //MedReportController::deleteUploadFiles();
+            $fileName = MRSettings::where('name', 'tmp_file_name')->first();  
+
+            $ts = Excel::import($import, $this->savePath.$fileName->value);
+
+            //Temporarty OFF
+            MedReportController::deleteUploadFiles();
+            MRSettings::where('name', 'tmp_file_name')->update([
+                'value' => '',
+            ]);
+        }
 
         $count = MRImportedSheetData::count();
 
@@ -255,6 +317,13 @@ class MedReportController extends MRBaseController
         // return view('medical_reports.usg.report')->with([
         //     'count' => $count,
         // ]);
+
+        
+        // data stored in DB
+        MRSettings::where('name', 'imported')->update([
+            'value' => 'true',
+        ]);
+
         return view('medical_reports.usg.report', compact('doctorName', 'count', 'examinations', 'reportables', 'report'));
     }
 

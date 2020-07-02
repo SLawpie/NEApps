@@ -42,10 +42,13 @@ return [
     'logout' => 'Wyloguj',
     'logged' => 'Zalogowany jako:',
     'remember' => 'Zapamiętaj mnie',
+
+    'user' => 'Użytkownik',
     
     'send-reset-link' => 'Prześlij link',
 
-    'failed' => 'Podany adres nie został zarejestrowany',
+    'failed-rem' => 'Podany adres nie został zarejestrowany',
+    'failed' => 'Niepoprawny adres e-mail lub hasło',
     'throttle' => 'Zbyt dużo prób logowania. Spróbuj ponowni za :seconds sekund.',
 
 ];

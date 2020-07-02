@@ -1,9 +1,54 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
 
 
-/* body {
+.auth-body {
   background-image: url("../images/patterns/what-the-hex-dark.png");
-} */
+}
+
+.auth-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 84px;
+  text-align: center;
+  color: #636b6f;
+}
+
+.auth-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100%;  
+  min-height: 100vh;
+  /* height: 100vh; */
+}
+
+.auth-border-login{
+  border-right:1px solid #fff;
+  min-height:450px;
+  float:right;
+}
+
+.auth-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  /* border: 1px solid transparent; */
+  border-radius: 0;
+}
+
 
 .ne-table {
   font-family: Lato, Arial, sans-serif;

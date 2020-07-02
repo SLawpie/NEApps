@@ -1,86 +1,57 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-5">
-            <div class="card shadow-lg border-0 rounted-sm mt-5">
-                <div class="card-header bg-secondary text-white-50">
-                    <h3 class="text-center my-2">{{ __('auth.login.login') }}</h3>
-                </div>
-                <div class="card-body bg-dark text-white-50">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
 
-                        <div class="form-group">
-                            <label class="small mb-1" for="email">{{ __('auth.email.address') }}</label>
-                            <input id="email" type="email" 
+<div class="auth-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm-12 col-md-5 col-lg-4 offset-lg-1">
+                <div class="auth-title m-b-md">
+                    {{config('app.name')}}
+                </div>
+            </div>
+            <div class="col-md-1 d-none d-md-block">   
+                <div class="auth-border-login"></div>
+            </div>
+            <div class="col-sm-12 col-xs-12 col-md-5 col-lg-4 ml-4">
+
+                <div class="h3 text-center mb-4">{{ __('auth.login.login') }}</div>
+
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <label class="mb-1 h5" for="email">{{ __('auth.email.address') }}</label>
+                    <input id="email" type="email" 
                                 class="bg-dark text-white-50 form-control py-4 @error('email') is-invalid @enderror" 
                                 name="email" value="{{ old('email') }}" 
                                 required autocomplete="email" autofocus 
                                 placeholder="{{ __('auth.email.enter') }}">
 
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                     @enderror
 
-                        <div class="form-group">
-                            <label class="small mb-1" for="password">{{ __('auth.password.password') }}</label>
-                            <input id="password" type="password" 
-                                class="bg-dark text-white-50 form-control py-4" 
-                                name="password"
-                                required autocomplete="current-password"
-                                placeholder="{{ __('auth.password.enter') }}">
+                     <div class="form-group">
+                        <label class="mt-4 mb-1 h5" for="password">{{ __('auth.password.password') }}</label>
+                        <input id="password" type="password" 
+                            class="bg-dark text-white-50 form-control py-4" 
+                            name="password"
+                            required autocomplete="current-password"
+                            placeholder="{{ __('auth.password.enter') }}">
 
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong> aaa {{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong> aaa {{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>    
 
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <div class="form-check p-0">
-                                    <input class="form-check-input" name="remember" id="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
-                                    
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('auth.remember') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                            @if (Route::has('password.request'))
-                                <a class="small" href="{{ route('password.request') }}">
-                                    {{ __('auth.password.forgot') }}
-                                </a>
-                            @else
-                                &nbsp;
-                            @endif
-                            
-                            <button type="submit" class="btn btn-primary col-6">
-                                {{ __('auth.login.button') }}
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer text-center bg-secondary text-white-50 p-1">
-                    <div class="small">
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">
-                                {{ __('auth.login.need') }}
-                            </a>
-                        @else 
-                            &nbsp;
-                        @endif
-                    </div>
-                    
-                </div>
+                    <button type="submit" class="mt-4 auth-btn btn-primary btn-block">
+                        {{ __('auth.login.button') }}
+                    </button>
+
+                </form>
             </div>
         </div>
     </div>
