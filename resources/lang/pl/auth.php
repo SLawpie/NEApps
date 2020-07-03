@@ -13,6 +13,10 @@ return [
     |
     */
 
+    'username-email' => [
+        'label' => 'Nazwa użytkownika lub email',
+        'enter' => 'Podaj nazwę użytkownika lub email',
+    ],
     'email' => [
         'address' => 'Adres e-mail',
         'enter' => 'Podaj adres e-mail'
@@ -48,7 +52,7 @@ return [
     'send-reset-link' => 'Prześlij link',
 
     'failed-rem' => 'Podany adres nie został zarejestrowany',
-    'failed' => 'Niepoprawny adres e-mail lub hasło',
+    'failed' => 'Nieprawidłowe dane do logowania!',
     'throttle' => 'Zbyt dużo prób logowania. Spróbuj ponowni za :seconds sekund.',
 
 ];

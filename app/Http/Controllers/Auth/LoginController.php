@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -48,5 +49,30 @@ class LoginController extends Controller
 
         $this->redirectTo = route('home');
         return $this->redirectTo;
+    }
+
+    public function login(Request $request)
+    {   
+
+        $input = $request->all();
+  
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+  
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
+        {
+            return redirect()->route('home');
+        }else{
+            // return redirect()->route('login')->with('username','Email-Address And Password Are Wrong.');
+            return redirect()->back()
+            ->withInput()
+            ->withErrors([
+                'username' => trans('auth.failed'),
+            ]);
+        }
+          
     }
 }
