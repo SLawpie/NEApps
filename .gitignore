@@ -15,4 +15,5 @@ yarn-error.log
 *.xls
 *.xlsx
 *.csv
+*.bak
 

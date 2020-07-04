@@ -1,10 +1,20 @@
 @extends('layouts.app')
 
+@section('application-module-name')
+    <div class="text-white mb-0 ">
+        
+    </div>
+@endsection
+
 @section('content')
 
-<h1 class="mt-4">
-    {{ __('home.welcome') }} {{ Auth::user()->name }}
+<h1 class="mt-0">
+    {{ __('home.welcome') }}!
 </h1>
+
+<div>
+
+</div>
 
 {{-- <div class="container"> --}}
     {{-- <div class="row justify-content-center">

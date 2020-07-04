@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
 
+html, body {
+  background-color: #151515;
+}
 
 .auth-body {
   background-image: url("../images/patterns/what-the-hex-dark.png");
@@ -103,7 +106,7 @@
 }
 
 .ne-table td:nth-of-type(6) {
-    width: auto;
+  width: auto;
 }
 
 
@@ -121,16 +124,152 @@
 .ne-fixed {
     position: fixed;
 
-  }
+}
 
 .ne-progress-container {
     height: 3px;
     background: #171717;
     margin-bottom: 8px;
-  }
+}
   
-  .ne-progress-bar {
-    height: 3px;
-    background: #9146FF;
-    width: 0%;
-  }
+.ne-progress-bar {
+  height: 3px;
+  background: #9146FF;
+  width: 0%;
+}
+
+.sidebar-container {
+  position: fixed;
+  width: 220px;
+  height: 100%;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.sidebar-logo {
+  padding: 10px 15px 10px 30px;
+  font-size: 20px;
+  background-color: #2574A9;
+  width: 100%;
+}
+
+.sidebar-logo a,
+.sidebar-logo a:active,
+.sidebar-logo a:hover,
+.sidebar-logo a:focus {
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+}
+
+.sidebar-navigation, .sidebar-user-navigation{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  position: relative;
+}
+
+.sidebar-navigation li, .sidebar-user-navigation li {
+  background-color: transparent;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  line-height: 20px;
+}
+
+.sidebar-navigation li a, .sidebar-user-navigation li a {
+  padding: 10px 15px 10px 30px;
+  display: block;
+  color: #fff;
+}
+
+.sidebar-navigation li .fa, .sidebar-user-navigation li .fa {
+  margin-right: 10px;
+}
+
+.sidebar-navigation li a:active,
+.sidebar-user-navigation li a:active,
+.sidebar-navigation li a:hover,
+.sidebar-user-navigation li a:hover,
+.sidebar-navigation li a:focus,
+.sidebar-user-navigation li a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.sidebar-navigation li::before {
+  background-color: #2574A9;
+  position: absolute;
+  content: '';
+  height: 100%;
+  left: 0;
+  top: 0;
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  width: 3px;
+  z-index: -1;
+}
+
+.sidebar-navigation li:hover::before,
+.sidebar-user-navigation li:hover::before {
+  width: 100%;
+}
+
+.sidebar-navigation .header,
+.sidebar-user-navigation .header {
+  font-size: 12px;
+  text-transform: uppercase;
+  background-color: #151515;
+  padding: 10px 15px 10px 30px;
+}
+
+.sidebar-navigation .header::before,
+.sidebar-user-navigation .header::before {
+  background-color: transparent;
+}
+
+.sidebar-user-navigation li::before {
+  background-color: #e71336;
+  position: absolute;
+  content: '';
+  height: 100%;
+  left: 0;
+  top: 0;
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  width: 3px;
+  z-index: -1;
+}
+
+.content-container {
+  padding-left: 196px;
+  padding-top: 20px;
+  overflow-y: auto;
+}
+
+/* Main content */
+.ne-main {
+  margin-top: 60px; /* Add a top margin to avoid content overlay */
+  margin-left: 20px;
+  height: calc(100vh - 55px);
+}
+
+/* The navigation bar */
+.ne-navbar {
+  overflow: hidden;
+  background-color: #151515;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  height: 60px;
+  border-bottom: solid 1px #2574A9;;
+}
+
+.ne-wrapper {
+  margin-top: 55px;
+  height: calc(100vh - 55px);
+  display: flex;
+}
