@@ -23,16 +23,16 @@
     
 </head>
 <body class="auth-body">
-    {{-- <div id="layoutAuthentication"> --}}
+    <div id="layoutAuthentication">
 
-        {{-- <div id="layoutAuthentication_content"> --}}
-            {{-- <main> --}}
+        <div id="layoutAuthentication_content">
+            <main>
                 
                 @yield('content')
-            {{-- </main> --}}
-        {{-- </div> --}}
+            </main>
+        </div>
 
-        {{-- <div id="layoutAuthentication_footer">
+        <div id="layoutAuthentication_footer">
             <div class="footer fixed-bottom p-2 text-white-50 small">
                 <div class="d-flex justify-content-between">
                     <div class="mr-auto">
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
-    {{-- </div> --}}
+        </div>
+    </div>
 </body>
 </html>
