@@ -38,6 +38,11 @@ Auth::routes([
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/userSettings','HomeController@showUserSettings')->name('user.settings');
+
+Route::get('/changePassword','HomeController@showChangePasswordForm')->name('password.change.form');
+Route::post('/changePassword','HomeController@changePassword')->name('password.change');
+
 Route::get('/excel/test', 'MedReportController@test')->name('excel.test');
 
 Route::get('/medicalreports', 'MedReportController@index')->name('medical_reports.index');

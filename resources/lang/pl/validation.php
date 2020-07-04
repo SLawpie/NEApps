@@ -87,7 +87,8 @@ return [
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'The :attribute must be at least :min characters.',
+        //'string' => 'The :attribute must be at least :min characters.',
+        'string' => ':attribute musi mieć przynajmniej :min znaków.',
         'array' => 'The :attribute must have at least :min items.',
     ],
     'not_in' => 'The selected :attribute is invalid.',
@@ -133,6 +134,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'new-password-confirm' => [
+            'same' => 'Nowe hasło nie zostało poprawnie potwierdzone!',
+        ],
     ],
 
     /*
@@ -148,6 +152,7 @@ return [
 
     'attributes' => [
         'file' => 'Plik',
+        'new-password' => 'Hasło',
     ],
 
 ];

@@ -226,6 +226,12 @@ html, body {
   padding: 10px 15px 10px 30px;
 }
 
+.sidebar-navigation .user-header{
+  font-size: 14px;
+  background-color: #151515;
+  padding: 10px 15px 10px 15px;
+}
+
 .sidebar-navigation .header::before,
 .sidebar-user-navigation .header::before {
   background-color: transparent;

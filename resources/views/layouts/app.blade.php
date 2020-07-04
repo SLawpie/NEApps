@@ -37,8 +37,27 @@
             </div>
             <div>
                 <ul class="sidebar-navigation">
-                    <li class="header">
-                        &nbsp;
+                    <li class="user-header">
+                        <div class="mt-3 d-flex flex-row">
+                            <div class="">
+                                <svg width="40px" height="40px" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                                    <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                {{ Auth::user()->name }}<br>
+                                @if (Auth::user()->hasRole('admin'))
+                                    <p class="text-danger">administrator</p>
+                                @elseif(Auth::user()->hasRole('user'))
+                                    <p class="text-warning">użytkownik</p>
+                                @else
+                                    <p class="text-info">Gość</p>
+                                @endif
+
+                            </div>
+                        </div>
                     </li>
                     <li>
                     <a href="{{ route('home') }}">
@@ -81,9 +100,9 @@
             <div class="mt-auto">
                 <ul class="sidebar-user-navigation">
                     <li>
-                        <a href="#">
+                        <a href="{{ route('user.settings') }}">
                             <i class="fa fa-cog" aria-hidden="true"></i> 
-                            Settings
+                            Ustawienia
                         </a>
                     </li>
                     <li>
@@ -113,7 +132,7 @@
                  </div>
             </div>
 
-              <div class="ne-main">
+              <div class="ne-main ml-4">
                     @yield('content')
               </div>
         </div>
