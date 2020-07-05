@@ -30,7 +30,7 @@
 <body class="" style="overflow: hidden;">
     <div class="sidebar-container">
         <div class="d-flex align-items-start flex-column h-100">
-            <div class="sidebar-logo">
+            <div class="sidebar-logo text-center">
                 <a class="navbar-brand" href="{{ route('home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -127,7 +127,7 @@
     <div class="content-container">
         <div class="container-fluid">
             <div class="ne-navbar d-flex d-flex align-items-center">
-                <div class="ml-3">
+                <div class="ml-4">
                     @yield('application-module-name')
                  </div>
             </div>

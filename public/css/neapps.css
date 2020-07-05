@@ -128,8 +128,8 @@ html, body {
 
 .ne-progress-container {
     height: 3px;
-    background: #171717;
-    margin-bottom: 8px;
+    /* background: #f10303; */
+    /* margin-bottom: 8px; */
 }
   
 .ne-progress-bar {
@@ -137,6 +137,39 @@ html, body {
   background: #9146FF;
   width: 0%;
 }
+
+/* The navigation bar */
+.ne-navbar, .ne-second-navbar {
+  overflow: hidden;
+  background-color: #151515;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  height: 60px;
+}
+
+.ne-navbar {
+  border-bottom: solid 1px #2574A9;
+}
+
+.ne-second-navbar {
+  margin-top: 60px;
+}
+
+.ne-wrapper {
+  margin-top: 55px;
+  height: calc(100vh - 55px);
+  display: flex;
+}
+
+/* Main content */
+.ne-main {
+  margin-top: 60px; /* Add a top margin to avoid content overlay */
+  margin-left: 20px;
+  height: calc(100vh - 55px);
+}
+
+
 
 .sidebar-container {
   position: fixed;
@@ -254,28 +287,4 @@ html, body {
   padding-left: 196px;
   padding-top: 20px;
   overflow-y: auto;
-}
-
-/* Main content */
-.ne-main {
-  margin-top: 60px; /* Add a top margin to avoid content overlay */
-  margin-left: 20px;
-  height: calc(100vh - 55px);
-}
-
-/* The navigation bar */
-.ne-navbar {
-  overflow: hidden;
-  background-color: #151515;
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
-  height: 60px;
-  border-bottom: solid 1px #2574A9;;
-}
-
-.ne-wrapper {
-  margin-top: 55px;
-  height: calc(100vh - 55px);
-  display: flex;
 }
