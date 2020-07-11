@@ -38,7 +38,7 @@ class LogController extends Controller
                 $time_zone = "Europe/Warsaw";
                 $ip = 'localhost';
             } else {
-                $ip = $request->ip();
+                $ip = $loginAttempt->ip;
                 $ipInfo = file_get_contents('http://ip-api.com/json/' . $ip);
                 $ipInfo = json_decode($ipInfo);
                 $time_zone = $ipInfo->timezone;
