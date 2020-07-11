@@ -38,10 +38,13 @@ Auth::routes([
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/userSettings','HomeController@showUserSettings')->name('user.settings');
+Route::get('/userSettings','User\UserController@showUserSettings')->name('user.settings');
 
-Route::get('/changePassword','HomeController@showChangePasswordForm')->name('password.change.form');
-Route::post('/changePassword','HomeController@changePassword')->name('password.change');
+Route::get('/history','User\UserController@showUserHistory')->name('user.history');
+Route::get('/usersHistory', 'Admin\LogController@showUsersHistory')->name('admin.history')->middleware('can:manage-users');
+
+Route::get('/changePassword','User\UserController@showChangePasswordForm')->name('password.change.form');
+Route::post('/changePassword','User\UserController@changePassword')->name('password.change');
 
 Route::get('/excel/test', 'MedReportController@test')->name('excel.test');
 

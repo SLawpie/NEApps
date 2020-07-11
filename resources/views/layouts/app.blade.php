@@ -39,7 +39,7 @@
                 <ul class="sidebar-navigation">
                     <li class="user-header">
                         <div class="mt-3 d-flex flex-row">
-                            <div class="">
+                            <div class="mt-2">
                                 <svg width="40px" height="40px" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
                                     <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
@@ -49,13 +49,13 @@
                             <div class="ml-3">
                                 {{ Auth::user()->name }}<br>
                                 @if (Auth::user()->hasRole('admin'))
-                                    <p class="text-danger">administrator</p>
+                                    <div class="text-danger">administrator</div>
                                 @elseif(Auth::user()->hasRole('user'))
-                                    <p class="text-warning">użytkownik</p>
+                                    <div class="text-warning">użytkownik</div>
                                 @else
-                                    <p class="text-info">Gość</p>
+                                    <div class="text-info">Gość</div>
                                 @endif
-
+                                <div class="text-white-50 pt-0 font-weight-lighter font-italic">{{ Auth::user()->username }}</div>
                             </div>
                         </div>
                     </li>
@@ -65,20 +65,31 @@
                             {{ __('welcome.home') }}
                         </a>
                     </li>
-                    @can('manage-users')
+                    @if (Auth::user()->hasRole('admin'))
+                        <li class="header">
+                            Administracja
+                        </li>
                         <li>
-                            <a href="#">
-                                <i class="fas fa-user-friends"></i>
-                                {{ __('app.admin.users.managment') }}
+                            <a href="{{ route('admin.history') }}">
+                                <i class="fas fa-key"></i>
+                                Historia logowań
                             </a>
                         </li>
-                    @endcan
+                        @can('manage-users')
+                            <li>
+                                <a href="{{ route('admin.users.index') }}">
+                                    <i class="fas fa-user-friends"></i>
+                                    {{ __('app.admin.users.managment') }}
+                                </a>
+                            </li>
+                        @endcan
+                    @endif
                     <li class="header">
                         {{ __('app.group.apps') }}
                     </li>
                      <li>
                         <a href="{{ route('medical_reports.index') }}">
-                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <i class="fas fa-book-medical" aria-hidden="true"></i>
                             {{ __('app.medical-reports') }}
                         </a>
                     </li>
