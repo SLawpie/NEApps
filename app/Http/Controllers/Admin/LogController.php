@@ -50,9 +50,8 @@ class LogController extends Controller
 
             $diffDays = $date->diffInDays();
             $dateNow = now()->setTimezone($time_zone)->locale('pl_PL');
-
-            $date->locale('pl_PL')->isoFormat('DD. MMM YYYY, HH:mm');
-            $myDate = $date;
+            
+            $myDate = $date->locale('pl_PL')->isoFormat('DD. MMM YYYY, HH:mm');
             
             if ($diffDays == 0)
                 if ($date->day == $dateNow->day)
@@ -83,7 +82,6 @@ class LogController extends Controller
                     'success' => $loginAttempt->success,
             ];
         };
-//dd($loginAttempts);
         return view('admin.history')->with('loginAttempts', $loginAttempts);
     }
 

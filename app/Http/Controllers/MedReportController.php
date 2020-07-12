@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Crypt;
 use Gate;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 use App\Imports\MRSheetNamesImport;
 use App\Imports\MRSelectSheetImport;
@@ -31,38 +32,22 @@ class MedReportController extends MRBaseController
 
     public function test()
     {
-        if (Gate::denies('medical-reports')){
-            return view('home');
-        }
-
         return view('medical_reports.test');
     }
 
 
     public function index()
     {
-        if (Gate::denies('medical-reports')){
-            return view('home');
-        }
-
         return view('medical_reports.index');
     }
 
     public function importTestFile()
     {
-
-        if (Gate::denies('medical-reports')){
-            return view('home');
-        }
         return view('medical_reports.excel');
     }
 
     public function importFile()
     {
-
-        if (Gate::denies('medical-reports')){
-            return view('home');
-        }
         return view('medical_reports.import');
     }
 
@@ -230,10 +215,18 @@ class MedReportController extends MRBaseController
 
     public function readSheet($request)
     {
-        $decrypted = Crypt::decryptString($request);
+
+        try {
+            $decrypted = Crypt::decryptString($request);
+        } catch (DecryptException $e) {
+            return view('medical_reports.index');
+            //echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+
         $pieces = explode("-", $decrypted);
         $sheetNo = $pieces[0];
         $doctorName = $pieces[1];
+
 
         $imported = MRSettings::where('name', 'imported')->first(); 
         

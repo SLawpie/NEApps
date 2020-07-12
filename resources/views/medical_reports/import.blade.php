@@ -41,8 +41,6 @@
     @error('file')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    
-    @include('partials.alerts')
 
     <script type="application/javascript">
         $('input[type="file"]').change(function(e){

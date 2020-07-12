@@ -46,16 +46,19 @@ Route::get('/usersHistory', 'Admin\LogController@showUsersHistory')->name('admin
 Route::get('/changePassword','User\UserController@showChangePasswordForm')->name('password.change.form');
 Route::post('/changePassword','User\UserController@changePassword')->name('password.change');
 
-Route::get('/excel/test', 'MedReportController@test')->name('excel.test');
+Route::get('/excel/test', 'MedReportController@test')->name('excel.test')->middleware('can:medical-reports');
 
-Route::get('/medicalreports', 'MedReportController@index')->name('medical_reports.index');
+Route::get('/medicalreports', 'MedReportController@index')->name('medical_reports.index')->middleware('can:medical-reports');
 
-Route::get('/medicalreports/import', 'MedReportController@importFile')->name('medical_reports.import.file');
-Route::post('/medicalreports/import', 'MedReportController@importExcel')->name('medical_reports.import.excel');
-Route::get('/medicalreports/doctors/{sheet}', 'MedReportController@readSheet')->name('medical_reports.import.sheet');
+Route::get('/medicalreports/import', 'MedReportController@importFile')->name('medical_reports.import.file')->middleware('can:medical-reports');
+Route::post('/medicalreports/import', 'MedReportController@importExcel')->name('medical_reports.import.excel')->middleware('can:medical-reports');
+Route::get('/medicalreports/doctors/{sheet}', 'MedReportController@readSheet')->name('medical_reports.import.sheet')->middleware('can:medical-reports');
 
-Route::get('/excel/import', 'MedReportController@importTestFile')->name('excel.import.file');
-Route::post('/excel/import', 'MedReportController@importTestExcel')->name('excel.import.excel');
+Route::get('/excel/import', 'MedReportController@importTestFile')->name('excel.import.file')->middleware('can:medical-reports');
+Route::post('/excel/import', 'MedReportController@importTestExcel')->name('excel.import.excel')->middleware('can:medical-reports');
+
+Route::get('/plasmacosts', 'Noelle\PlasmaCostsController@index')->name('plasma-costs.index')->middleware('can:plasma-costs');
+
 
 //Route::resource('/admin/users', 'Admin\UsersController', ['except' => ['show', 'create', 'store']]);
 //Dodanie Namespace

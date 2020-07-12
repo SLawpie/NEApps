@@ -40,5 +40,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('medical-reports', function($user){
             return $user->hasAnyRoles(['admin', 'medical-reports']);
         });
+
+        Gate::define('plasma-costs', function($user){
+            return $user->hasAnyRoles(['admin', 'plasma-costs']);
+        });
     }
 }

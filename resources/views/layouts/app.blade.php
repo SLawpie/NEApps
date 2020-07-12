@@ -87,24 +87,22 @@
                     <li class="header">
                         {{ __('app.group.apps') }}
                     </li>
-                     <li>
-                        <a href="{{ route('medical_reports.index') }}">
-                            <i class="fas fa-book-medical" aria-hidden="true"></i>
-                            {{ __('app.medical-reports') }}
-                        </a>
-                    </li>
-                    {{-- <li>
-                        <a href="#">
-                            <i class="fa fa-cog" aria-hidden="true"></i> 
-                            Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> 
-                            Information
-                        </a>
-                    </li> --}}
+                    @can('plasma-costs')
+                        <li>
+                            <a href="{{ route('plasma-costs.index') }}">
+                                <i class="fas fa-burn" aria-hidden="true"></i>
+                                Koszt palenia
+                            </a>
+                        </li>
+                    @endcan
+                    @can('medical-reports')
+                        <li>
+                            <a href="{{ route('medical_reports.index') }}">
+                                <i class="fas fa-book-medical" aria-hidden="true"></i>
+                                {{ __('app.medical-reports') }}
+                            </a>
+                        </li>
+                    @endcan
                 </ul>
             </div>
 
@@ -129,7 +127,7 @@
 
                     </li>
                 </ul>
-                <div class="mb-2 pt-1 text-right text-white-50" style="font-size: 8px">v.0.1.0.2</div>
+                <div class="mb-2 pt-1 text-right text-white-50" style="font-size: 8px">v.0.2.0.1</div>
             </div>
         </div>
     </div>
