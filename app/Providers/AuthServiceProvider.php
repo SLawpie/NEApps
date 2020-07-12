@@ -26,11 +26,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('manage-users', function($user){
-            return $user->hasAnyRoles(['admin', 'author']);
+            return $user->hasRole('admin');
         });
 
         Gate::define('edit-users', function($user){
-            return $user->hasAnyRoles(['admin', 'author']);
+            return $user->hasRole('admin');
         });
 
         Gate::define('delete-users', function($user){
@@ -38,7 +38,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('medical-reports', function($user){
-            return $user->hasRole('medical-reports');
+            return $user->hasAnyRoles(['admin', 'medical-reports']);
         });
     }
 }

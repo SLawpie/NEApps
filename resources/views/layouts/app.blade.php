@@ -129,7 +129,7 @@
 
                     </li>
                 </ul>
-                <div class="mb-3"></div>
+                <div class="mb-2 pt-1 text-right text-white-50" style="font-size: 8px">v.0.1.0.2</div>
             </div>
         </div>
     </div>

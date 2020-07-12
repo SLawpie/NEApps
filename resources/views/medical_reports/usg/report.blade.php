@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <div class="bg-white text-dark p-2">
+    <div class="bg-white text-dark p-2 user-select-all">
         <samp>
             <strong><b>
             Kędziezyn-Koźle, 
