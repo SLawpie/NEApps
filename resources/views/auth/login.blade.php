@@ -58,7 +58,7 @@
                             </span>
                         @enderror --}}
                     </div>    
-
+                    <input id="timeZone" name="timeZone" value="" type="hidden">
                     <button type="submit" class="mt-4 auth-btn btn-primary btn-block">
                         {{ __('auth.login.button') }}
                     </button>
@@ -67,4 +67,15 @@
         </div>
     </div>
 </div>
+
 @endsection
+
+
+@section('page-js-script')
+<script type="text/javascript">
+    $(document).ready(function() {
+        var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById("timeZone").value = timezone;
+    });
+</script>
+@stop

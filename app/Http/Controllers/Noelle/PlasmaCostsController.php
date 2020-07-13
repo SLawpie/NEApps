@@ -18,5 +18,9 @@ class PlasmaCostsController extends Controller
         return view('plasma-costs.index');
     }
 
+    public function settingsFormShow()
+    {
+        return view('plasma-costs.settings');
+    }
 
 }

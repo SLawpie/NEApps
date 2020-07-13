@@ -127,7 +127,7 @@
 
                     </li>
                 </ul>
-                <div class="mb-2 pt-1 text-right text-white-50" style="font-size: 8px">v.0.2.0.1</div>
+                <div class="mb-2 pt-1 text-right text-white-50 mr-2" style="font-size: 8px">v{{ config('neapps.version') }}</div>
             </div>
         </div>
     </div>

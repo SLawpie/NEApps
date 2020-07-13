@@ -39,9 +39,7 @@ class LogController extends Controller
                 $ip = 'localhost';
             } else {
                 $ip = $loginAttempt->ip;
-                $ipInfo = file_get_contents('http://ip-api.com/json/' . $ip);
-                $ipInfo = json_decode($ipInfo);
-                $time_zone = $ipInfo->timezone;
+                $time_zone = config('neapps.timezone');
             }
 
             $date = new Carbon($loginAttempt->created_at);

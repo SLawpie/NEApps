@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Config;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -113,6 +114,13 @@ class LoginController extends Controller
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
         {
+
+            $timezone = [
+                'timezone' => $request->timezone // timezone
+            ];
+            //Config::write('neapps', $timezone);
+            config()->set('neapps.timezone', $timezone);
+
             $loginAttempt->success = true;       //logged in
             $loginAttempt->save();
             //return redirect()->route('home');

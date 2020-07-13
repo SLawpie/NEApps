@@ -58,7 +58,7 @@ Route::get('/excel/import', 'MedReportController@importTestFile')->name('excel.i
 Route::post('/excel/import', 'MedReportController@importTestExcel')->name('excel.import.excel')->middleware('can:medical-reports');
 
 Route::get('/plasmacosts', 'Noelle\PlasmaCostsController@index')->name('plasma-costs.index')->middleware('can:plasma-costs');
-
+Route::get('/plasmacosts/settings', 'Noelle\PlasmaCostsController@settingsFormShow')->name('plasma-costs.settings')->middleware('can:plasma-costs');
 
 //Route::resource('/admin/users', 'Admin\UsersController', ['except' => ['show', 'create', 'store']]);
 //Dodanie Namespace
