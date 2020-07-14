@@ -147,4 +147,8 @@
         </div>
     </div>
 </body>
+
+@yield('page-js-files')
+@yield('page-js-script')
+
 </html>

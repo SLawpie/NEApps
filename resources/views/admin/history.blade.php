@@ -8,8 +8,8 @@
 
 @section('content')
 
-<div class="col-10 offset-1">
-    <table class="table table-sm table-hover table-dark">
+<div class="col">
+    <table id="example" class="table table-sm table-hover table-dark">
         <thead>
         <tr class="text-white-50">
             <th scope="col" class="text-center">LP</th>
@@ -56,5 +56,14 @@
         </tbody>
     </table>
 </div>
+
+@endsection
+
+@section('page-js-files')
+
+
+@endsection
+
+@section('page-js-script')
 
 @endsection

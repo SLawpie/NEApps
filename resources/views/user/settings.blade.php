@@ -11,10 +11,10 @@
     @can('plasma-costs')
         <div class="">
             <div class="h3 mb-3 text-info ml-4">Koszt palenia</div>
-            <div class="card text-white text-center bg-transparent border-0 mb-3 mr-0 col-2" >    
-                <div class="card-body my-0">
+            <div class="row justify-content-start mx-4">   
+                <div class="col-md-6 col-lg-4 col-xl-2 mb-3">
                     <a href="{{ route('plasma-costs.settings') }}" 
-                            class="btn btn-primary" style="width: 14rem">
+                            class="btn btn-primary btn-block">
                         Ceny i parametry
                     </a>
                 </div>
@@ -22,24 +22,24 @@
         </div>
     @endcan
 
-    <div class="">
+    <div class="mt-4">
         <div class="h3 mb-3 text-info ml-4">Bezpieczeństwo</div>
-        <div class="card text-white text-center bg-transparent border-0 mb-3 mr-0 float-left col-2">    
-            <div class="card-body my-0">
-                <a href="{{ route('password.change.form') }}" 
-                        class="btn btn-primary" style="width: 14rem">
-                    Zmiana hasła
-                </a>
+            <div class="row justify-content-start mx-4">
+                <div class="col-md-6 col-lg-4 col-xl-2 text-nowrap mb-3">
+                    <a href="{{ route('password.change.form') }}" 
+                            class="btn btn-primary btn-block">
+                        Zmiana hasła
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-2 mb-3">
+                    <a href="{{ route('user.history') }}" 
+                            class="btn btn-primary btn-block text-nowrap">
+                        Historia logowań
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="card text-white text-center bg-transparent border-0 mb-3 mr-0 float-left col-2">    
-            <div class="card-body my-0">
-                <a href="{{ route('user.history') }}" 
-                        class="btn btn-primary" style="width: 14rem">
-                    Historia logowań
-                </a>
-            </div>
-        </div>
+        {{-- </div> --}}
     </div>
 
 @endsection

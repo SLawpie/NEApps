@@ -13,9 +13,9 @@
   <div class="h3 mb-3 text-info ml-4">Ustawienia</div>
   <div class="h5 mb-3 text-primary ml-4 ">Ceny  i parametry palenia</div>
 
-  <div class="col-10">
+  <div class="row justify-content-start mx-4"> 
 
-    <div class="col-4 float-left">
+    <div class="col-md-6 col-lg-4 col-xl-3 mb-3">
       <div class="h6 text-white">Ceny blachy:</div>
       <table class="table table-hover table-sm table-dark">
         <thead>
@@ -51,7 +51,7 @@
     </div>
 
 
-    <div class="col-4 float-left">
+    <div class="col-md-6 col-lg-4 col-xl-3 mb-3">
       <div class="h6 text-white">Dysza: 40A</div>
       <table class="table table-hover table-sm table-dark">
         <thead>
@@ -81,7 +81,7 @@
       </table>
     </div>
 
-    <div class="col-4 float-left">
+    <div class="col-md-6 col-lg-4 col-xl-3 mb-3">
       <div class="h6 text-white">Dysza: 60A</div>
       <table class="table table-hover table-sm table-dark">
         <thead>

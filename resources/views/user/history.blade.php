@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div class="col-10 offset-1">
+<div class="col">
     <table class="table table-sm table-hover table-dark">
         <thead>
         <tr class="text-white-50">

@@ -29,7 +29,7 @@ class LogController extends Controller
         //foreach (LoginAttempt::where('user_name',$user->username)
         foreach (LoginAttempt::where('user_name','LIKE','%')
             ->orderBy('created_at', 'desc')
-            ->limit(20)
+            ->limit(50)
             ->get() 
             as $loginAttempt)
         {
