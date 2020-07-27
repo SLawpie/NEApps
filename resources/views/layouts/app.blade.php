@@ -135,7 +135,7 @@
 
     <div class="content-container">
         <div class="container-fluid">
-            <div class="ne-navbar d-flex d-flex align-items-center">
+            <div class="ne-navbar d-flex align-items-center">
                 <div class="ml-4">
                     @yield('application-module-name')
                  </div>

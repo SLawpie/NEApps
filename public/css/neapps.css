@@ -166,9 +166,24 @@ html, body {
 .ne-main {
   margin-top: 60px; /* Add a top margin to avoid content overlay */
   margin-left: 20px;
-  height: calc(100vh - 55px);
+  height: calc(100vh - 100px);
 }
 
+/* second content */
+.ne-main-1 {
+  margin-top: 60px; /* Add a top margin to avoid content overlay */
+  height: calc(100vh - 100px);
+}
+
+/* second content */
+.ne-main-2 {
+  margin-top: 100px; /* Add a top margin to avoid content overlay */
+  height: calc(100vh - 140px);
+}
+
+.ne-overflow-y {
+  overflow-y: auto;
+}
 
 
 .sidebar-container {
@@ -286,5 +301,5 @@ html, body {
 .content-container {
   padding-left: 196px;
   padding-top: 20px;
-  overflow-y: auto;
+  overflow-y: hidden;
 }

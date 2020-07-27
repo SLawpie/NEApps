@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-
+<div class= "ne-main-1 ne-overflow-y">
 <div class="col">
     <table class="table table-sm table-hover table-dark">
         <thead>
@@ -52,5 +52,5 @@
         </tbody>
     </table>
 </div>
-
+</div>
 @endsection

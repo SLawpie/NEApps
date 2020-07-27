@@ -21,6 +21,7 @@
 @endsection
 
 @section('content')
+
     <div class="ne-second-navbar">
         <div class="d-flex flex-row mt-3">
             <div class="h3 font-weight-light mr-3">
@@ -37,7 +38,7 @@
             </div>
         </div>
     </div>
-
+<div class="ne-main-2 ne-overflow-y">
     <div class="bg-white text-dark p-2 user-select-all">
         <samp>
             <strong><b>
@@ -87,6 +88,6 @@
             @endforeach
         </samp>
     </div>
-    <div class="mt-5">&nbsp;</div>
-  
+</div>
+
 @endsection

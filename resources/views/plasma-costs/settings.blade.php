@@ -22,7 +22,7 @@
           <tr>
             <th scope="col" class="text-center">Blacha<br>[mm]</th>
             <th scope="col" class="text-center">S235JR<br>[zł/kg]</th>
-            <th scope="col" class="text-center">DX-51D<br>[zł/kg]</th>
+            <th scope="col" class="text-center">DX51D<br>[zł/kg]</th>
           </tr>
         </thead>
         <tbody>
