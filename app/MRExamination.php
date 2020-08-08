@@ -8,6 +8,11 @@ class MRExamination extends Model
 {
     //
     protected $fillable = [
-        'name'
+        'name', 'reportable'
     ];
+
+    public function prices () {
+        return $this->belongsToMany('App\MRPrice');
+    }
+    
 }

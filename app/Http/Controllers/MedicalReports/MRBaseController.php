@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\MedicalReports;
+
+use App\Http\Controllers\Controller;
 
 use View;
 

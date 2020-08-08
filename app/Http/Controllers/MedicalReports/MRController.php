@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\MedicalReports;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -18,9 +19,10 @@ use App\MRSettings;
 use App\MRImportedSheetData;
 use App\MRFacility;
 use App\MRExamination;
+use App\MRPrice;
 
 
-class MedReportController extends MRBaseController
+class MRController extends MRBaseController
 {
 
     public function __construct()
@@ -28,6 +30,7 @@ class MedReportController extends MRBaseController
         parent::__construct();
         $this->middleware('auth');
         $this->savePath = public_path('/upload/');
+        $this->paid = null;
     }
 
     public function test()
@@ -106,55 +109,22 @@ class MedReportController extends MRBaseController
             'file' => 'required|file|max:5000|mimes:xls,xlsx',
         ]);
 
-        MedReportController::deleteUploadFiles();
-        MedReportController::initialSettings();
+        MRController::deleteUploadFiles();
+        MRController::initialSettings();
 
         $dateTime = date('Ymd_His');
         $file = $request->file('file');
         $fileName = 'MR-' . $dateTime . '-' . $file->getClientOriginalName();
         
         $file->move($this->savePath, $fileName);
-        
-        // $mrSettings = MRSettings::firstOrCreate(
-        //     ['name' => 'tmp_file_name'],
-        //     ['value' => $fileName]
-        // );
-        // if ($mrSettings)
-        // {
-        //     MRSettings::where('name', 'tmp_file_name')->update([
-        //         'value' => $fileName,
-        //     ]);
-        // }
+
         MRSettings::where('name', 'tmp_file_name')->update([
             'value' => $fileName,
         ]);
-        // $mrSettings = MRSettings::firstOrCreate(
-        //     ['name' => 'original_file_name'],
-        //     ['value' => $file->getClientOriginalName()]
-        // );
-        // if ($mrSettings)
-        // {
-        //     MRSettings::where('name', 'original_file_name')->update([
-        //         'value' => $file->getClientOriginalName(),
-        //     ]);
-        // }
+
         MRSettings::where('name', 'original_file_name')->update([
             'value' => $file->getClientOriginalName(),
         ]);
-        // $mrSettings = MRSettings::firstOrCreate(
-        //     ['name' => 'usg'],
-        //     ['value' => false]
-        // );
-        // if ($mrSettings)
-        // {
-        //     MRSettings::where('name', 'usg')->update([
-        //         'value' => 'false',
-        //     ]);
-        // }
-        // MRSettings::where('name', 'usg')->update([
-        //     'value' => 'false',
-        // ]);
-
 
         $Import = new MRSheetNamesImport();
         $ts = Excel::import($Import, $this->savePath . $fileName);
@@ -175,6 +145,20 @@ class MedReportController extends MRBaseController
     //
     public function initialSettings()
     {
+        //
+        // sprawdzenie/dodanie INNYch jako 'placówki'
+        // 'Others' sa zawsze 'reportable'
+        // dlatego jest 'false'
+        //
+        $mrSettings = MRFacility::firstOrCreate(
+            ['name' => 'Others'],   
+            ['reportable' => 0]
+        );
+
+        $mrSettings = MRSettings::firstOrCreate(
+            ['name' => 'paid'],
+            ['value' => 'Płatne']
+        );
         $mrSettings = MRSettings::firstOrCreate(
             ['name' => 'tmp_file_name'],
             ['value' => '']
@@ -252,7 +236,7 @@ class MedReportController extends MRBaseController
             $ts = Excel::import($import, $this->savePath.$fileName->value);
 
             //Temporarty OFF
-            MedReportController::deleteUploadFiles();
+            MRController::deleteUploadFiles();
             MRSettings::where('name', 'tmp_file_name')->update([
                 'value' => '',
             ]);
@@ -260,9 +244,8 @@ class MedReportController extends MRBaseController
 
         $count = MRImportedSheetData::count();
 
-        $reportables = MRFacility::where('reportable',true)->get();
-        //$reportables = MRFacility::all();
-
+        $reportables = MRFacility::where('reportable',true)->orwhere('name', 'Others')->orderBy('name')->get();
+    
         $examinations = MRExamination::where('reportable', true)->orderBy('name', 'asc')->get();
 
         foreach ($examinations as $key => $examination) {
@@ -288,36 +271,44 @@ class MedReportController extends MRBaseController
                 $sum -= $info[0]->sum;
 
             }
-
             $report[$examination->name]['Others'] = $sum;
 
         };
 
-        //dd($report);
+        $this->paid = MRSettings::where('name', 'paid')->first();
+        $this->paid = $this->paid['value'];
 
-        // foreach ($reportables as $reportable) {
-        //     $text = $reportable->name;
-        //     $examinations[$text] = MRImportedSheetData::where('col0', 'like', $text);
-        // }
+        $reportables = $reportables->reject(function($value){
+            return $value['name'] == $this->paid;
+        })
+        ->merge($reportables->filter(function($value){
+            return $value['name'] == $this->paid;
+            })
+        );
+        $reportables = $reportables->reject(function($value){
+            return $value['name'] == "Others";
+        })
+        ->merge($reportables->filter(function($value){
+            return $value['name'] == "Others";
+            })
+        );
+        $reportables = $reportables->reject(function($value){
+            return (($value['name'] != $this->paid) && ($value['name'] != "Others"));
+        })
+        ->merge($reportables->filter(function($value){
+            return (($value['name'] != $this->paid) && ($value['name'] != "Others"));
+            })
+        );
 
-        // $text = 'Płatne';
-        // $examinations[$text] = MRImportedSheetData::where('col0', 'like', $text);
-        
-        //dd($examinations);
-        
-        //echo ("GOTOWE ! - ".$count);
-        
-        // return view('medical_reports.usg.report')->with([
-        //     'count' => $count,
-        // ]);
+        $priceList = MRPrice::with('examination', 'facility')->get();
 
-        
         // data stored in DB
         MRSettings::where('name', 'imported')->update([
             'value' => 'true',
         ]);
 
-        return view('medical_reports.usg.report', compact('doctorName', 'count', 'examinations', 'reportables', 'report'));
-    }
+        $paid = $this->paid;
 
+        return view('medical_reports.usg.report', compact('doctorName', 'count', 'examinations', 'reportables', 'priceList', 'report', 'paid'));
+    }
 }

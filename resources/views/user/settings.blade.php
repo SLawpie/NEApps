@@ -8,6 +8,20 @@
 
 @section('content')
 
+    @can('medical-reports')
+    <div class="">
+        <div class="h3 mb-3 text-info ml-4">Raporty</div>
+        <div class="row justify-content-start mx-4">   
+            <div class="col-md-6 col-lg-4 col-xl-2 mb-3">
+                <a href="{{ route('medical_reports.pricelist') }}" 
+                        class="btn btn-primary btn-block">
+                    Cennik badań
+                </a>
+            </div>
+        </div>
+    </div>
+    @endcan
+
     @can('plasma-costs')
         <div class="">
             <div class="h3 mb-3 text-info ml-4">Koszt palenia</div>
@@ -22,7 +36,7 @@
         </div>
     @endcan
 
-    <div class="mt-4">
+    <div class="">
         <div class="h3 mb-3 text-info ml-4">Bezpieczeństwo</div>
             <div class="row justify-content-start mx-4">
                 <div class="col-md-6 col-lg-4 col-xl-2 text-nowrap mb-3">

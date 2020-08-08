@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Http\Controllers\Noelle;
+namespace App\Http\Controllers\PlasmaCosts;
 
 use App\Http\Controllers\Controller;
 

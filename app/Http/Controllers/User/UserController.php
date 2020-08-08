@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Jenssegers\Agent\Agent;
 
 use App\User;
-use App\LoginAttempt;
+use App\Models\User\LoginAttempt;
 
 class UserController extends Controller
 {

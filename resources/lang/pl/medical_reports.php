@@ -6,4 +6,5 @@ return [
     'import' => 'Wybierz dane do raportu',
     'file' => 'Plik danych: ',
     'doctors' => 'Wybierz lekarza',
+    'paid' => 'Płatne',
 ];

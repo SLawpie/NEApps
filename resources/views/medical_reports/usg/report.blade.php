@@ -59,31 +59,31 @@
                 @if ($report[$examination->name]['All'] > 0)
                     <strong><b>{{ $report[$examination->name]['All'] }} x {{ $examination->name }}</b></strong><br>
                     @foreach ($reportables as $reportable)
-                        @if( $report[$examination->name][$reportable->name] > 0)
+                        @if($report[$examination->name][$reportable->name] > 0)
                             @php
                                 echo(str_repeat('&nbsp;',5));
                             @endphp
-                            {{ $reportable->name }}:
+                            @if ($reportable->name == "Others")
+                                wg. cennika przychodni:
+                            @else
+                                {{ $reportable->name }}:
+                            @endif
                             @php
                                 // echo(str_repeat('&nbsp;',2));
                             @endphp
-                            {{ $report[$examination->name][$reportable->name] }}x       
-                            0,00                     
+                            {{ $report[$examination->name][$reportable->name] }}x
+                            @php
+                                if ($priceList->where('examination_id', $examination->id)->firstWhere('facility_id', $reportable->id)){
+                                    $price = $priceList->where('examination_id', $examination->id)->firstWhere('facility_id', $reportable->id)->price;
+                                    $price = number_format($price, 2, ',', '');
+                                } else {
+                                    $price = '---,--';
+                                }
+                            @endphp       
+                            <strong><b>{{ $price }}</b></strong>
                             <br>
                         @endif
                     @endforeach
-                    @if ($report[$examination->name]['Others'] > 0)
-                        @php
-                            echo(str_repeat('&nbsp;',5));
-                        @endphp
-                        wg. cennika przychodni:
-                        @php
-                            // echo(str_repeat('&nbsp;',2));
-                        @endphp
-                        {{ $report[$examination->name]['Others'] }}x
-                        0,00                     
-                        <br>
-                    @endif
                 @endif
             @endforeach
         </samp>

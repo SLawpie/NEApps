@@ -46,19 +46,24 @@ Route::get('/usersHistory', 'Admin\LogController@showUsersHistory')->name('admin
 Route::get('/changePassword','User\UserController@showChangePasswordForm')->name('password.change.form');
 Route::post('/changePassword','User\UserController@changePassword')->name('password.change');
 
-Route::get('/excel/test', 'MedReportController@test')->name('excel.test')->middleware('can:medical-reports');
+Route::namespace('MedicalReports')->prefix('medicalreports')->name('medical_reports.')->middleware('can:medical-reports')->group(function(){
+     Route::get('/', 'MRController@index')->name('index');
+     Route::get('/import', 'MRController@importFile')->name('import.file');
+     Route::post('/import', 'MRController@importExcel')->name('import.excel');
+     Route::get('/doctors/{sheet}', 'MRController@readSheet')->name('import.sheet');
+     Route::get('/pricelist', 'PriceListController@priceList')->name('pricelist');
+     Route::get('/pricelist/actionGet', 'PriceListController@actionGet')->name('pricelist.actionGet');
+     Route::post('/pricelist/action', 'PriceListController@action')->name('pricelist.action');
+});
 
-Route::get('/medicalreports', 'MedReportController@index')->name('medical_reports.index')->middleware('can:medical-reports');
+Route::get('/excel/test', 'MedicalReports\MRController@test')->name('excel.test')->middleware('can:medical-reports');
+Route::get('/excel/import', 'MedicalReports\MRController@importTestFile')->name('excel.import.file')->middleware('can:medical-reports');
+Route::post('/excel/import', 'MedicalReports\MRController@importTestExcel')->name('excel.import.excel')->middleware('can:medical-reports');
 
-Route::get('/medicalreports/import', 'MedReportController@importFile')->name('medical_reports.import.file')->middleware('can:medical-reports');
-Route::post('/medicalreports/import', 'MedReportController@importExcel')->name('medical_reports.import.excel')->middleware('can:medical-reports');
-Route::get('/medicalreports/doctors/{sheet}', 'MedReportController@readSheet')->name('medical_reports.import.sheet')->middleware('can:medical-reports');
-
-Route::get('/excel/import', 'MedReportController@importTestFile')->name('excel.import.file')->middleware('can:medical-reports');
-Route::post('/excel/import', 'MedReportController@importTestExcel')->name('excel.import.excel')->middleware('can:medical-reports');
-
-Route::get('/plasmacosts', 'Noelle\PlasmaCostsController@index')->name('plasma-costs.index')->middleware('can:plasma-costs');
-Route::get('/plasmacosts/settings', 'Noelle\PlasmaCostsController@settingsFormShow')->name('plasma-costs.settings')->middleware('can:plasma-costs');
+Route::namespace('PlasmaCosts')->prefix('plasmacosts')->name('plasma-costs.')->middleware('can:plasma-costs')->group(function(){
+     Route::get('/', 'PlasmaCostsController@index')->name('index');
+     Route::get('/settings', 'PlasmaCostsController@settingsFormShow')->name('settings');
+});
 
 //Route::resource('/admin/users', 'Admin\UsersController', ['except' => ['show', 'create', 'store']]);
 //Dodanie Namespace

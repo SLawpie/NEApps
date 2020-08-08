@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 //use Jenssegers\Agent\Agent;
 
-use App\LoginAttempt;
+use App\Models\User\LoginAttempt;
 
 class LoginController extends Controller
 {
