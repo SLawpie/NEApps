@@ -2,5 +2,5 @@
 
 return [
     'timezone' => 'Europe/Warsaw',
-    'version' => '0.2.6',
+    'version' => '0.2.7',
 ];
