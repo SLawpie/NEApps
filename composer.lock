@@ -869,7 +869,7 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.27.0",
+            "version": "v7.30.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
@@ -5423,7 +5423,7 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.3.7",
+            "version": "2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
@@ -5847,7 +5847,7 @@
                 "fideloper/proxy": "^4.2",
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "fruitcake/laravel-cors": "^1.0",
-                "laravel/framework": "^7.0",
+                "laravel/framework": "^7.30.4",
                 "laravel/tinker": "^2.0",
                 "nunomaduro/larastan": "^0.5",
                 "orchestra/testbench": "^5.0",
